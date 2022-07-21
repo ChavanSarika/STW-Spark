@@ -1,0 +1,86 @@
+﻿@page
+@model  STW_Spark.Pages.Cars.EditModel
+}
+<form method="post">
+    <div class="border backgroundwhite">
+        <input asp-for="car.Id" hidden>
+        <input asp-for="car.UserId" hidden>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="car.VIN"></label>
+            </div>
+            <div class="col-5">
+
+                <input asp-for="car.VIN" class="form-control" />
+                <span asp-validation-for="car.VIN" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="car.Make"></label>
+            </div>
+            <div class="col-5">
+
+                <input asp-for="car.Make" class="form-control" />
+                <span asp-validation-for="car.Make" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="car.Model"></label>
+            </div>
+            <div class="col-5">
+
+                <input asp-for="car.Model" class="form-control" />
+                <span asp-validation-for="car.Model" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="car.Year"></label>
+            </div>
+            <div class="col-5">
+
+                <input asp-for="car.Year" class="form-control" />
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="car.Style"></label>
+            </div>
+            <div class="col-5">
+
+                <input asp-for="car.Style" class="form-control" />
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="car.Miles"></label>
+            </div>
+            <div class="col-5">
+
+                <input asp-for="car.Miles" class="form-control" />
+
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-5 offset-2">
+            <div class="row">
+                <div class="col-6">
+                    <input type="submit" value="Edit" class="form-control btn btn-info" />
+                </div>
+                <div class="col-6">
+                    <a asp-page="Index" asp-route-UserId="@Model.car.UserId" class="form-control btn btn-success" />Back To List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

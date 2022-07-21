@@ -1,0 +1,116 @@
+﻿@page
+@using  STW_Spark.Utility;
+@model  STW_Spark.Pages.Cars.IndexModel
+@{
+}
+<h3 class="text-info">Car info for Customer</h3>
+<partial name="_StatusMessage" model="Model.StatusMessage">
+<div class="container backgroundwhite">
+    <div class="card">
+        <div class="card-header text-white  bg-dark ml-0 row container">
+            <div class="col-6">
+                <h3>Car</h3>
+            </div>
+            <div class="col-6 text-right">
+                @if (User.IsInRole(SD.AdminEndUser))
+                {
+                    <a asp-page="/Users/Index" class="btn btn-outline-info btn-sm"  >Back To User</a>
+
+                }
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row" style="padding-bottom: 40px; padding-top: 20px;" > 
+                <p>
+                 <a asp-page="Create" asp-route-UserId="@Model.carsCustomerVM.user.Id" class="btn btn-success">Create New Car</a>                    
+                </p>
+                <div class="col-md-6 offset-md-3">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label asp-for="@Model.carsCustomerVM.user.Name"></label>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <input type="text" disabled asp-for="@Model.carsCustomerVM.user.Name" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label asp-for="@Model.carsCustomerVM.user.Email"></label>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <input type="text" disabled asp-for="@Model.carsCustomerVM.user.Email" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label asp-for="@Model.carsCustomerVM.user.PhoneNumber"></label>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <input type="text" disabled asp-for="@Model.carsCustomerVM.user.PhoneNumber" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*  *@
+            <div class="row">
+                @if (Model.carsCustomerVM.cars.Count()==0)
+                {
+                    <p>No car found !!</p>
+                }
+                else
+                {
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.carsCustomerVM.cars.FirstOrDefault().VIN)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.carsCustomerVM.cars.FirstOrDefault().Model)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.carsCustomerVM.cars.FirstOrDefault().Make)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.carsCustomerVM.cars.FirstOrDefault().Miles)
+                    </th>
+                </tr>
+                @foreach (var item in Model.carsCustomerVM.cars)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.VIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Miles)
+                </td>
+                <td>
+                    <a class="btn btn-secondary" asp-page="../Services/History" asp-route-carId="@item.Id"><i class="fa fa-setting"></i>Service History</a>
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-page="../Services/Create" asp-route-carId="@item.Id"><i class="fa fa-add"></i>Add New Service </a>
+                </td>
+                <td style="width:150px">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" asp-page="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-success" asp-page="Details" asp-route-id="@item.Id"><i class="fa fa-info"></i></a>
+                        <a class="btn btn-danger" asp-page="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+                }
+
+            </table>
+                }
+            </div>
+        </div>
+    </div>
+ </div>

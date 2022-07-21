@@ -1,0 +1,90 @@
+﻿@page
+@model  STW_Spark.Pages.Users.IndexModel
+@{
+}
+<br/><br/>
+<form  method="get" asp-page="Index">
+
+    <div class="border backgroundwhite">
+        <div  style="height:60px; padding-top:10px;"class="container border border-secondary">
+            <div class="row">
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-4">
+                            @Html.Editor("searchEmail",new {htmlattributes =new { @class="form-control",placeholder="Email.."} })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("searchName", new { htmlattributes = new { @class = "form-control", placeholder = "Name.." } })
+                        </div>
+                        <div class="col-4">
+                            @Html.Editor("searchPhoneNumber", new { htmlattributes = new { @class = "form-control", placeholder = "Number.." } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="row">
+                        <button type="submit" class="btn btn-info form"/>Search</button>
+                    </div>
+                    
+                </div>
+
+                </div>
+         </div>
+            <div class="row">
+                <div class="col-6">
+                    <h2 class="text-info">Customer List</h2>
+                </div>
+                <div class="col-6 text-right">
+                    <a asp-page="/Account/Register" asp-area="Identity" class="btn btn-info"><i class="fa fa-plus-square"></i> &nbsp;Create New Customer</a>
+
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.usersVM.applicationUsers[0].Name)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.usersVM.applicationUsers[0].PhoneNumber)
+                    </th>
+                    <th>
+                        @Html.LabelFor(m => m.usersVM.applicationUsers[0].Email)
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+                @foreach (var item in Model.usersVM.applicationUsers)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Email)
+                </td>
+                <td>
+                    <a asp-page="../cars/Index" asp-route-UserId="@item.Id">View Cars</a>
+                </td>
+                <td style="width:150px">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" asp-page="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger" asp-page="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+                    @*<tr>
+                        <td colspan="5" class="text-right">
+                            <div page-model="@Model.usersVM.pagingInfo" asp-action="Index" page-class="btn border"
+                                 page-class-normal="btn btn-light" page-class-selected="btn btn-info active" class="btn-group">
+                            </div>
+                        </td>
+                    </tr>*@
+                }
+
+            </table>
+        </div>
+</form>

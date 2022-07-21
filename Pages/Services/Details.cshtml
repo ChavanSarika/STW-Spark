@@ -1,0 +1,86 @@
+﻿@page
+@model  STW_Spark.Pages.Services.DetailsModel
+@{
+}
+<div class="container backgroundwhite row">
+    <div class="col-6">
+        <h2 class="text-info py-2"> Service Details</h2>
+    </div>
+    <div class="col-3 offset-3 py-2 text-rigt">
+        <a asp-page="../Services/History" asp-route-carId="@Model.serviceHeader.CarId" class="btn btn-outline-info btn-sm">Back To User</a>
+    </div>
+</div>
+
+<div class="container backgroundwhite">
+    <div class="card">
+        <div class="card-header text-white  bg-dark ml-0 row container border">
+            <div class="col-1">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="col-5">
+                <label class="text-info">@Model.serviceHeader.Car.user.Name</label><br />
+               <label class="text-info">@Model.serviceHeader.Car.user.Email</label>
+            </div>
+
+            <div class="col-5 text-right">
+                <label class="text-info">@Model.serviceHeader.Car.VIN</label><br />
+                <label class="text-info">@Model.serviceHeader.Car.Model</label>
+            </div>
+        </div>
+        <div class="card-body">
+                <div class="row pt-3">
+                    <div class="col-7">
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    @Html.DisplayNameFor(m => m.serviceDetails[0].serviceType.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => m.serviceDetails[0].serviceType.Price)
+                                </th>
+                            </tr>
+                            @foreach (var item in Model.serviceDetails)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(c => item.ServiceName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(c => item.ServicePrice)
+                                    </td>
+    
+                                </tr>
+                            }
+                            <tr style="background-color:aquamarine">
+                                <td colspan="1">
+                                    <h6 class="text-success">Total Price</h6>
+                                </td>
+                                <td colspan="2">
+                                    <h6 class="text-success">$@Model.serviceHeader.TotalPrice</h6>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-3">
+                                <label asp-for="@Model.serviceHeader.Miles" class="form-control" style="border:none"></label>
+                            </div>
+                            <div class="col-9">
+                                <input asp-for="@Model.serviceHeader.Miles" id="txtMiles" class="form-control" disabled/>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-9 offset-3">
+                                <textarea placeholder="Comments......" asp-for="@Model.serviceHeader.details" id="txtinput" class="form-control" style="background:none" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+        </div>
+
+    </div>
+</div>
